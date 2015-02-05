@@ -1,0 +1,17 @@
+import random
+
+f = open ("pic.ppm", 'w')
+f.write ("P3\n500 500\n255\n")
+
+i = 500 * 500
+
+while i > 0:
+    
+    r = random.randint (0, 255)
+    g = random.randint (0, 255)
+    b = random.randint (0, 255)
+    t = ("%d %d %d "%(r, g, b))
+    i = i - 1
+    f.write (t)
+
+f.close()

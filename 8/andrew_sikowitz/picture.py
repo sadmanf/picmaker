@@ -53,8 +53,8 @@ for i in range(512):
         if dire < 0:
             dire = tp+dire
         
-        c = math.sqrt(dire)+1.5 #Thickness of lines
-        d = 5 #How many rings (r = d*theta)
+        c = 2*abs(math.atan2(y,x))+1 #Thickness of lines
+        d = 10 #How many rings (r = d*theta)
 
 	#print x,y,dire
 

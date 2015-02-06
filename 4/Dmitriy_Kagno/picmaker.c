@@ -35,10 +35,10 @@ int main(){
       green = 0;
       blue = 0;
       
-      if((sq(i-h) + (sq(j-k))) == sq(100) ){
-	red = 255;
+      if((sq(i-h) + (sq(j-k))) <= sq(100) ){
+	red = i%255;
 	green = 255;
-	blue = 255;
+	blue = j%255;
       }
 
       

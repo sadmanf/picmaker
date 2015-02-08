@@ -59,6 +59,6 @@ def rainbow_maker():
     f.close()
 
 if __name__ == "__main__":
-    rand_maker()
+    #rand_maker()
     swirl_maker()
     rainbow_maker()

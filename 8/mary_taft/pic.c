@@ -15,8 +15,8 @@ int main(){
   yres = 500;
   max_val = 255;
   
-  fd = open("pic.ppm", O_CREAT | O_EXCL | 0666);
-  sprintf(buf, "P3 \n %d %d \n %d", xres, yres, max_val);
+  fd = open("pic.ppm", O_CREAT | O_WRONLY, 00777);
+  sprintf(buf, "P3\n%d %d\n%d\n", xres, yres, max_val);
   write(fd, buf, sizeof(buf));
   
   int i, j; //counters
@@ -39,7 +39,7 @@ int main(){
 	b = 200;
       }
 
-      sprintf(buf, "%d %d %d \t", r, g, b);
+      sprintf(buf, "%d %d %d\t", r, g, b);
       write(fd, buf, sizeof(buf));
 
     }

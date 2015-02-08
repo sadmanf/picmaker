@@ -1,0 +1,3 @@
+`make run` should make "out.ppm"
+
+Also, look in ./failures/, there's some cool other images (particularly in failures/trippin/)

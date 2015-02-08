@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <string.h>
 
 int main(){
   
@@ -13,11 +14,11 @@ int main(){
 
   xres = 700;
   yres = 500;
-  max_val = 255;
+  max_val = 256;
   
-  fd = open("pic.ppm", O_CREAT | O_WRONLY, 00777);
+  fd = open("pic.ppm", O_CREAT | O_TRUNC | O_WRONLY, 0664);
   sprintf(buf, "P3\n%d %d\n%d\n", xres, yres, max_val);
-  write(fd, buf, sizeof(buf));
+  write(fd, buf, strlen(buf));
   
   int i, j; //counters
   int r, g, b; //colors
@@ -25,27 +26,19 @@ int main(){
   for(i=0; i<xres; i++){
     for(j=0; j<yres; j++){
       
-      if(i<xres/3){
-	r = 200;
-	g = i%256;
-	b = j%256;
-      }else if(i<2*xres/3){
-	r = i%256;
-	g = 200;
-	b = j%256;
-      }else if(i<xres){
-	r = i%256;
-	g = j%256;
-	b = 200;
-      }
+      r = (i+j)%256;
+      g = i%256;
+      b = j%256;
 
       sprintf(buf, "%d %d %d\t", r, g, b);
-      write(fd, buf, sizeof(buf));
+      write(fd, buf, strlen(buf));
 
     }
-
-    write(fd, "\n", 1);
     
   }
+
+  close(fd);
+
+  return 0;
   
 }

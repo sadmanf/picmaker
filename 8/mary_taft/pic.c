@@ -12,8 +12,8 @@ int main(){
   char buf[32];
   int xres, yres, max_val;
 
-  xres = 700;
-  yres = 500;
+  xres = 1920/2;
+  yres = 1080/2;
   max_val = 256;
   
   fd = open("pic.ppm", O_CREAT | O_TRUNC | O_WRONLY, 0664);
@@ -23,12 +23,18 @@ int main(){
   int i, j; //counters
   int r, g, b; //colors
   
-  for(i=0; i<xres; i++){
-    for(j=0; j<yres; j++){
-      
-      r = (i+j)%256;
-      g = i%256;
-      b = j%256;
+  for(i=0; i<yres; i++){
+    for(j=0; j<xres; j++){
+
+      if(i<(yres/10) || i>(9*yres/10)){
+	r = 123;
+	g = 0;
+	b = j%256;
+      }else{
+	r = (i*i)%max_val;
+	g = (j*j)%max_val;
+	b = (i+j)%max_val;
+      }
 
       sprintf(buf, "%d %d %d\t", r, g, b);
       write(fd, buf, strlen(buf));

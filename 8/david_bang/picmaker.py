@@ -1,4 +1,5 @@
 import math,random
+from random import randint
 
 
 swag = open ('picmaker.ppm', 'w')
@@ -21,12 +22,16 @@ green = random.randrange(0,255)
 blue = random.randrange(0,255)
 
 for i in range (600):
-    if (i > 100):
-        red = red/1.1
-        green = green/1.1
-        blue = green/1.1
+    if ( i % 2 == 0):
+        red = red + randint(0,5) % 255
+    if ( i % 3 == 0):
+        green = green + randint(0,5) % 255
+    if ( i % 5 == 0):
+        blue = blue + randint(0,5) % 255
     for j in range (600):
+        
         swag.write ( str(red) + " " + str(green) + " " + str(blue) + "\n")
 
 swag.close()
+
 

@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <string.h>
 
 int main(){
   
@@ -11,41 +12,39 @@ int main(){
   char buf[32];
   int xres, yres, max_val;
 
-  xres = 700;
-  yres = 500;
-  max_val = 255;
+  xres = 1920/2;
+  yres = 1080/2;
+  max_val = 256;
   
-  fd = open("pic.ppm", O_CREAT | O_EXCL | 0666);
-  sprintf(buf, "P3 \n %d %d \n %d", xres, yres, max_val);
-  write(fd, buf, sizeof(buf));
+  fd = open("pic.ppm", O_CREAT | O_TRUNC | O_WRONLY, 0664);
+  sprintf(buf, "P3\n%d %d\n%d\n", xres, yres, max_val);
+  write(fd, buf, strlen(buf));
   
   int i, j; //counters
   int r, g, b; //colors
   
-  for(i=0; i<xres; i++){
-    for(j=0; j<yres; j++){
-      
-      if(i<xres/3){
-	r = 200;
-	g = i%256;
+  for(i=0; i<yres; i++){
+    for(j=0; j<xres; j++){
+
+      if(i<(yres/10) || i>(9*yres/10)){
+	r = 123;
+	g = 0;
 	b = j%256;
-      }else if(i<2*xres/3){
-	r = i%256;
-	g = 200;
-	b = j%256;
-      }else if(i<xres){
-	r = i%256;
-	g = j%256;
-	b = 200;
+      }else{
+	r = (i*i)%max_val;
+	g = (j*j)%max_val;
+	b = (i+j)%max_val;
       }
 
-      sprintf(buf, "%d %d %d \t", r, g, b);
-      write(fd, buf, sizeof(buf));
+      sprintf(buf, "%d %d %d\t", r, g, b);
+      write(fd, buf, strlen(buf));
 
     }
-
-    write(fd, "\n", 1);
     
   }
+
+  close(fd);
+
+  return 0;
   
 }

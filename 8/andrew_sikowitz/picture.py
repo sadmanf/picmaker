@@ -39,10 +39,10 @@ def getcolor(dire):
         g = 255-x*255/sd
         b = 0
 
-    return str(r) + " " + str(g) + " " + str(b) + " "
+    return str(int(r)) + " " + str(int(g)) + " " + str(int(b)) + " "
 
 s = "P3\n512 512\n255\n"
-minc = 100
+
 for i in range(512):
     for j in range(512):
         x = j-256
@@ -53,10 +53,10 @@ for i in range(512):
         if dire < 0:
             dire = tp+dire
         
-        c = dire/2+1
-        d = 3
+        c = 2*abs(math.atan2(y,x))+1 #Thickness of lines
+        d = 10 #How many rings (r = d*theta)
 
-        #print x,y,dire
+	#print x,y,dire
 
         if abs(mag - d*(tp*math.floor(mag/(d*tp))+dire)) < c:
             s += "0 0 0 "

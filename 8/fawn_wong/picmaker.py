@@ -12,9 +12,9 @@ for x in range(500):
             g = x + y % 255
             b = x + y % 255
         else:
-            r = x + y % 255
-            g = x + y % 255
-            b = x + y % 255
+            r = 255
+            g = 255
+            b = 255
         
         pic.write("%d %d %d "%(r, g, b))
     pic.write("\n")

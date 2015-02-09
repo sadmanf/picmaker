@@ -1,5 +1,5 @@
 class PPM
-  attr_reader :width, :height, :max_color_value
+  attr_reader :width, :height, :max_color_value, :pixels
 
   def initialize(pixels, options={})
     @pixels = pixels
@@ -17,7 +17,7 @@ class PPM
     file.write(stringify)
   end
 
-  private
+  # private
 
   def header_string
     header_string = ["P3"]
@@ -27,11 +27,16 @@ class PPM
   end
 
   def image_string
-    row_strings = @pixels.each { |row| convert_row_to_string(row) }
+    row_strings = @pixels.map { |row| convert_row_to_string(row) }
     row_strings.join("\n")
   end
 
   def convert_row_to_string(row_array)
-    row_array.join(' ')
+    pixel_strings = row_array.map { |pixel_array| convert_pixel_to_string(pixel_array) }
+    pixel_strings.join(' ')
+  end
+
+  def convert_pixel_to_string(pixel_array)
+    pixel_array.join(' ')
   end
 end

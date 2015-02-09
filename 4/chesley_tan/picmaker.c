@@ -33,35 +33,23 @@ int main(int argc, char *argv[]) {
             if (i < h / 2) {
                 // TL
                 if (u < w / 2) {
-                    r = colors ^ i % (h / 2) & colors ^ (w / 2 - (u % (w / 2))) | (w / 2 - (u % (w / 2)));
                     g = colors ^ i % (h / 2) & colors ^ (w / 2 - (u % (w / 2))) | (w / 2 - (u % (w / 2)));
-                    b = colors ^ i % (h / 2) & colors ^ (w / 2 - (u % (w / 2))) | (w / 2 - (u % (w / 2)));
                 }
                 // TR
                 else {
-                    r = colors ^ i % (h / 2) & colors ^ (u % (w / 2)) | (u % (w / 2));
                     g = colors ^ i % (h / 2) & colors ^ (u % (w / 2)) | (u % (w / 2));
-                    b = colors ^ i % (h / 2) & colors ^ (u % (w / 2)) | (u % (w / 2));
                 }
             }
             else {
                 // BL
                 if (u < w / 2) {
-                    r = colors ^ i % (h / 2) ^ colors ^ (w / 2 - (u % (w / 2))) | (w / 2 - (u % (w / 2)));
                     g = colors ^ i % (h / 2) ^ colors ^ (w / 2 - (u % (w / 2))) | (w / 2 - (u % (w / 2)));
-                    b = colors ^ i % (h / 2) ^ colors ^ (w / 2 - (u % (w / 2))) | (w / 2 - (u % (w / 2)));
                 }
                 // BR
                 else {
-                    r = colors ^ i % (h / 2) ^ colors ^ u % (w / 2) | (u % (w / 2));
                     g = colors ^ i % (h / 2) ^ colors ^ u % (w / 2) | (u % (w / 2));
-                    b = colors ^ i % (h / 2) ^ colors ^ u % (w / 2) | (u % (w / 2));
                 }
             }
-            // Green
-            r ^= b;
-            b ^= g;
-            g ^= r;
             sprintf(line_buf, "%d %d %d ", prep(r), prep(g), prep(b));
             strcat(buf, line_buf);
         }

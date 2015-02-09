@@ -2,7 +2,7 @@
 
 (require "rags/base.rkt")
 
-(define img (make-image 100 100 255))
+(define img (make-image 500 500 255))
 
 (define warp
   (case-lambda 

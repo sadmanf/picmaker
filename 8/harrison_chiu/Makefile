@@ -1,3 +1,3 @@
 all:
 	racket RUNTHIS.rkt
-	eog pic.ppm
+	xdg-open pic.ppm

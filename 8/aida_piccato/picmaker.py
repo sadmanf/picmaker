@@ -7,21 +7,14 @@ def picmaker(filename, pixels):
     f.write(pixels)
     f.close()
 
-def stripes():
-    pixels = ""
-    for i in range(0,500):
-        for j in range(0,500):
-            if j % 2 == 0:
-                pixels += "(%d, %d, %d)" % (0,0,0)
-            else:
-                pixels += "(%d, %d, %d)" % (23, 234, 0)
-    return pixels
-
 def sqrt():
     pixels = ""
     for i in range(0,500):
         for j in range(0,500):
-            pixels += "(%d, %d, %d)" % (math.sqrt(i),math.sqrt(i),math.sqrt(i))
+            pixels += pixel(math.sqrt((i**2))%255,math.sqrt((j**2))%255,math.sqrt(((i**2)+(j**2)))%255)
     return pixels
+
+def pixel(r, g, b):
+    return "(%d, %d, %d)" % (r, g, b)
     
 picmaker("stripes", sqrt());

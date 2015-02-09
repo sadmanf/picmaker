@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <math.h>
+#include <string.h>
+#include <fcntl.h>
+
+int main(){
+  int fd = open("picture.ppm" , O_WRONLY | O_CREAT , 0664);
+  write(fd , "P3\n 500 500\n 255\n", 256);
+  int x , y; x = 0; y = 0;
+  for (y; y < 500; y++){
+    for (x; x < 500; x++){
+      char pattern[256]; int r , g , b;
+      r = (y + x) % 255; g = (r + x + y) % 255; b = (r + g + x + y) % 255;
+      sprintf(pattern , "%d %d %d" , r , g , b);
+      write(fd , pattern , strlen(pattern));
+    }
+  }
+  close(fd);
+  return 0;
+}
